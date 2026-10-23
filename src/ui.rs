@@ -1,5 +1,6 @@
 
 mod view;
 mod update;
-pub mod app;
 pub mod messages;
+mod titlebar;
+mod sidebar;

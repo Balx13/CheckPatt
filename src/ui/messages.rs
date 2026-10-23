@@ -1,1 +1,4 @@
-pub enum Message {}
+#[derive(Clone)]
+pub enum Message {
+    None
+}

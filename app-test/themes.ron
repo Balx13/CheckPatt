@@ -1,0 +1,206 @@
+[
+    Theme(
+        name: "Contrast",
+        colors: {
+            "light": (
+                background: "#FFFFFF",
+                surface: "#F8F8F8",
+                surface_elevated: "#FFFFFF",
+
+                titlebar_background: "#FFFFFF",
+                sidebar_background: "#F8F8F8",
+
+                text_primary: "#141414",
+                text_secondary: "#595959",
+                text_disabled: "#9E9E9E",
+
+                accent: "#1F61D9",
+                border: "#D9D9D9",
+                focus: "#1F61D9",
+
+                success: "#1F853F",
+                warning: "#B86E00",
+                danger: "#CC1F1F",
+            ),
+            "dark": (
+                background: "#000000",
+                surface: "#090909",
+                surface_elevated: "#131313",
+
+                titlebar_background : "#000000",
+                sidebar_background: "#060606",
+
+                text_primary: "#F2F2F2",
+                text_secondary: "#A6A6A6",
+                text_disabled: "#616161",
+
+                accent: "#59A6FF",
+                border: "#242424",
+                focus: "#59A6FF",
+
+                success: "#4DCC7A",
+                warning: "#FFB840",
+                danger: "#FF5252",
+            )
+        },
+        letters: (
+            font: "System",
+            size: (
+                text: 14,
+                window_title: 20,
+                section_title: 16,
+                highlight: 16,
+                secondary_text: 12,
+                help_text: 11,
+                control_label: 13,
+                monospace_text: 13,
+            ),
+            weight: (
+                text: "normal",
+                window_title: "bold",
+                section_title: "semibold",
+                highlight: "semibold",
+                secondary_text: "normal",
+                help_text: "normal",
+                control_label: "medium",
+                monospace_text: "normal",
+            )
+        )
+    ),
+    Theme(
+        name: "Neutral",
+        colors: {
+            "light": (
+                background: "#F8F8F8",
+                surface: "#F3F3F3",
+                surface_elevated: "#FFFFFF",
+
+                titlebar_background: "#F8F8F8",
+                sidebar_background: "#EEEEEE",
+
+                text_primary: "#1F1F1F",
+                text_secondary: "#616161",
+                text_disabled: "#9E9E9E",
+
+                accent: "#296BD1",
+                border: "#D6D6D6",
+                focus: "#296BD1",
+
+                success: "#1F853F",
+                warning: "#B86E00",
+                danger: "#CC1F1F",
+            ),
+            "dark": (
+                background: "#101114",
+                surface: "#1A1B20",
+                surface_elevated: "#25262B",
+
+                titlebar_background: "#0E0F12",
+                sidebar_background: "#15161A",
+
+                text_primary: "#E8E8ED",
+                text_secondary: "#ADADB5",
+                text_disabled: "#6E6E75",
+
+                accent: "#599EFA",
+                border: "#33333B",
+                focus: "#599EFA",
+
+                success: "#4DBF73",
+                warning: "#F2AD40",
+                danger: "#F24D4D",
+            )
+        },
+        letters: (
+            type: "System",
+            size: (
+                text: 14,
+                window_title: 20,
+                section_title: 16,
+                highlight: 16,
+                secondary_text: 12,
+                help_text: 11,
+                control_label: 13,
+                monospace_text: 13,
+            ),
+            weight: (
+                text: "normal",
+                window_title: "bold",
+                section_title: "semibold",
+                highlight: "semibold",
+                secondary_text: "normal",
+                help_text: "normal",
+                control_label: "medium",
+                monospace_text: "normal",
+            )
+        )
+    ),
+    Theme(
+        name: "Potato",
+        colors: {
+            "light": (
+                background: "#FBF7EF",
+                surface: "#F1E6D3",
+                surface_elevated: "#FFFDF8",
+
+                titlebar_background: "#F7F0E3",
+                sidebar_background: "#EDE0CA",
+
+                text_primary: "#332519",
+                text_secondary: "#6B5138",
+                text_disabled: "#9A846B",
+
+                accent: "#A66A2C",
+                border: "#D5C1A0",
+                focus: "#A66A2C",
+
+                success: "#47733D",
+                warning: "#B87522",
+                danger: "#B64B3B",
+            ),
+            "dark": (
+                background: "#211810",
+                surface: "#302319",
+                surface_elevated: "#403023",
+
+                titlebar_background: "#1B140E",
+                sidebar_background: "#291D14",
+
+                text_primary: "#F3E5CE",
+                text_secondary: "#C9B394",
+                text_disabled: "#8F7960",
+
+                accent: "#C99556",
+                border: "#51402F",
+                focus: "#DDAA69",
+
+                success: "#83B879",
+                warning: "#E9B65F",
+                danger: "#E47B69",
+            )
+        },
+        letters: (
+            type: "System",
+            size: (
+                text: 14,
+                window_title: 20,
+                section_title: 16,
+                highlight: 16,
+                secondary_text: 12,
+                help_text: 11,
+                control_label: 13,
+                monospace_text: 13,
+            ),
+            weight: (
+                text: "normal",
+                window_title: "bold",
+                section_title: "semibold",
+                highlight: "semibold",
+                secondary_text: "normal",
+                help_text: "normal",
+                control_label: "medium",
+                monospace_text: "normal",
+            )
+        )
+    )
+]
