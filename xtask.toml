@@ -1,0 +1,6 @@
+# Settings for `cargo devrun` (see xtask/src/main.rs).
+
+# Directory the built executable is copied to and started from.
+# Relative paths are resolved from the project root; absolute paths work too.
+# (`~` is NOT expanded.) If this file or the key is missing, "app-test" is used.
+dest-dir = "app-test"

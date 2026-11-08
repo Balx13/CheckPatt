@@ -1,48 +1,70 @@
-pub mod read;
-pub mod hexacolors;
-pub mod letters;
+pub mod color;
+pub mod typography;
 
-use hexacolors::HexaColor;
-use letters::Letters;
+use color::HexColor;
+use typography::Typography;
 
-pub enum Colors {
+#[derive(Debug, Clone, Copy, PartialEq, Eq, serde::Deserialize)]
+pub enum Mode {
     Light,
     Dark,
-    System
+    System,
 }
 
+impl Mode {
+    pub fn is_dark(self) -> bool {
+        match self {
+            Mode::Light => false,
+            Mode::Dark => true,
+            // Hiba vagy "nem tudom" esetén világos.
+            Mode::System => matches!(dark_light::detect(), Ok(dark_light::Mode::Dark)),
+        }
+    }
+}
+
+#[derive(Debug, Clone, serde::Deserialize)]
 pub struct Theme {
-    name: String,
-    colors: ThemeColors,
-    fonts: Letters
+    pub name: String,
+    pub colors: ThemeColors,
+    pub typography: Typography,
 }
 
-pub struct  ThemeColors {
-    light: ColorPalette,
-    dark: ColorPalette
+impl Theme {
+    pub fn palette(&self, mode: Mode) -> &ColorPalette {
+        if mode.is_dark() {
+            &self.colors.dark
+        } else {
+            &self.colors.light
+        }
+    }
 }
 
+#[derive(Debug, Clone, serde::Deserialize)]
+pub struct ThemeColors {
+    pub light: ColorPalette,
+    pub dark: ColorPalette,
+}
+
+#[derive(Debug, Clone, serde::Deserialize)]
 pub struct ColorPalette {
-    pub background: HexaColor,
-    pub surface: HexaColor,
-    pub surface_elevated: HexaColor,
+    pub background: HexColor,
+    pub surface: HexColor,
+    pub surface_elevated: HexColor,
+    pub letters: HexColor,
 
-    pub titlebar_background: HexaColor,
-    pub sidebar_background: HexaColor,
+    pub titlebar_background: HexColor,
+    pub sidebar_background: HexColor,
+    pub hover: HexColor,
 
-    pub text_primary: HexaColor,
-    pub text_secondary: HexaColor,
-    pub text_disabled: HexaColor,
+    pub text_primary: HexColor,
+    pub text_secondary: HexColor,
+    pub text_disabled: HexColor,
 
-    pub accent: HexaColor,
-    pub border: HexaColor,
-    pub focus: HexaColor,
+    pub accent: HexColor,
+    pub border: HexColor,
+    pub focus: HexColor,
 
-    pub success: HexaColor,
-    pub warning: HexaColor,
-    pub danger: HexaColor
+    pub success: HexColor,
+    pub warning: HexColor,
+    pub danger: HexColor,
 }
-
-pub fn rgb(num: f32) -> f32 {num / 255.0}
-
-

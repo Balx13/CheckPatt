@@ -1,0 +1,2 @@
+[alias]
+devrun = "run --quiet --package xtask --"

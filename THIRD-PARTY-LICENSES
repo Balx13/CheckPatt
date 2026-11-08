@@ -1,0 +1,164 @@
+THIRD-PARTY SOFTWARE LICENSES
+
+This application uses the following third-party software components and assets.
+Each component is subject to its respective license terms.
+
+- serde
+name: serde
+description: Serialization framework for Rust
+repo: https://github.com/serde-rs/serde
+crates.io: https://crates.io/crates/serde
+docs/website: https://serde.rs
+
+Available licenses: MIT OR Apache-2.0
+License selected for this application: MIT
+
+MIT license text:
+https://opensource.org/license/mit
+
+The applicable copyright notice and full MIT License text are
+included with this distribution.
+
+- ron
+name: ron
+description: Rusty Object Notation
+repo: https://github.com/ron-rs/ron
+crates.io: https://crates.io/crates/ron
+docs/website: https://docs.rs/ron
+
+Available licenses: MIT OR Apache-2.0
+License selected for this application: MIT
+
+MIT license text:
+https://opensource.org/license/mit
+
+The applicable copyright notice and full MIT License text are
+included with this distribution.
+
+- dark-light
+name: dark-light
+description: Rust crate to detect if dark mode or light mode is enabled
+repo: https://github.com/rust-dark-light/dark-light
+crates.io: https://crates.io/crates/dark-light
+docs/website: https://docs.rs/dark-light/latest/dark_light
+
+Available licenses: MIT OR Apache-2.0
+License selected for this application: MIT
+
+MIT license text:
+https://opensource.org/license/mit
+
+The applicable copyright notice and full MIT License text are
+included with this distribution.
+
+- iced
+name: iced
+description: A cross-platform GUI library for Rust, inspired by Elm
+repo: https://github.com/iced-rs/iced
+crates.io: https://crates.io/crates/iced
+docs/website: https://iced.rs
+
+Available licenses: MIT
+License selected for this application: MIT
+
+MIT license text:
+https://opensource.org/license/mit
+
+The applicable copyright notice and full MIT License text are
+included with this distribution.
+
+- rand
+name: rand
+description: A Rust library for random number generation.
+repo: https://github.com/rust-random/rand
+crates.io: https://crates.io/crates/rand
+docs/website: https://rust-random.github.io/book
+
+Available licenses: MIT OR Apache-2.0
+License selected for this application: MIT
+
+MIT license text:
+https://opensource.org/license/mit
+
+The applicable copyright notice and full MIT License text are
+included with this distribution.
+
+- toml
+name: toml
+description: Rust TOML Parser
+repo: https://github.com/toml-rs/toml
+crates.io: https://crates.io/crates/toml
+docs/website: https://docs.rs/toml
+
+Available licenses: MIT OR Apache-2.0
+License selected for this application: MIT
+
+MIT license text:
+https://opensource.org/license/mit
+
+The applicable copyright notice and full MIT License text are
+included with this distribution.
+
+- directories
+name: directories
+description: a mid-level library that provides config/cache/data paths, following the respective conventions on Linux, macOS and Windows
+repo: https://codeberg.org/dirs/directories-rs
+crates.io: https://crates.io/crates/directories
+docs/website: https://docs.rs/directories
+
+Available licenses: MIT OR Apache-2.0
+License selected for this application: MIT
+
+MIT license text:
+https://opensource.org/license/mit
+
+The applicable copyright notice and full MIT License text are
+included with this distribution.
+
+- serde_json
+name: serde_json
+description: Strongly typed JSON library for Rust
+repo: https://github.com/serde-rs/json
+crates.io: https://crates.io/crates/serde_json
+docs/website: https://docs.rs/serde_json
+
+Available licenses: MIT OR Apache-2.0
+License selected for this application: MIT
+
+MIT license text:
+https://opensource.org/license/mit
+
+The applicable copyright notice and full MIT License text are
+included with this distribution.
+
+- iced_aw
+name: iced_aw
+description: Additional widgets for the Iced GUI library
+repo: https://github.com/iced-rs/iced_aw
+crates.io: https://crates.io/crates/iced_aw
+docs/website: https://docs.rs/iced_aw
+
+Available licenses: MIT
+License selected for this application: MIT
+
+MIT license text:
+https://opensource.org/license/mit
+
+The applicable copyright notice and full MIT License text are
+included with this distribution.
+
+- Tabler Icons
+name: Tabler Icons
+description: A set of over 6200 free MIT-licensed high-quality SVG icons for you to use in your web projects.
+repo: https://github.com/tabler/tabler-icons
+crates.io: -
+docs/website: https://tabler.io/icons
+
+Available licenses: MIT
+License selected for this application: MIT
+
+MIT license text:
+https://opensource.org/license/mit
+
+The applicable copyright notice and full MIT License text are
+included with this distribution.
