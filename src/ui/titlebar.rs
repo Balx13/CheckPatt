@@ -1,84 +1,93 @@
 use iced::{
-    widget::{button, container, row, text},
+    widget::{button, container, text},
     Background, Border, Color, Element, Length,
 };
 
 use crate::app::App;
 use crate::ui::messages::Message;
-use crate::app::themes::color;
-use iced_aw::{Menu, menu_items, menu_bar, menu};
+use iced_aw::{menu_bar, menu};
 
-const HEIGHT: f32 = 20.0;
-const MENU_HEIGHT: f32 = HEIGHT / 2.0;
+#[derive(Clone, Copy)]
+struct TitlebarStyle {
+    background: Color,
+    text: Color,
+    hover: Color,
+    height: f32,
+    menu_button_height: f32,
+    menu_button_horizontal_padding: u16,
+    submenu_max_width: f32,
+    hover_radius: f32,
+}
 
-fn hover_style(status: button::Status) -> button::Style {
-    let mut style = button::Style::default();
-    if status == button::Status::Hovered {
-        style.background = Some(Background::Color(Color::from_rgba(0.25, 0.25, 0.25, 0.35)));
-        style.border = Border {
-            radius: 5.0.into(),
-            ..Border::default()
-        };
+impl TitlebarStyle {
+    fn from_app(app: &App) -> Self {
+        let ui = &app.theme().ui;
+        Self {
+            background: app.palette().titlebar_background.into(),
+            text: app.palette().letters.into(),
+            hover: app.palette().titlebar_hover.into(),
+            height: ui.titlebar_height,
+            menu_button_height: ui.menu_button_height,
+            menu_button_horizontal_padding: ui.menu_button_horizontal_padding,
+            submenu_max_width: ui.submenu_max_width,
+            hover_radius: ui.titlebar_hover_radius,
+        }
     }
-    style
+
+    fn menu_button<'a>(&self, label: &'a str, msg: Message) -> button::Button<'a, Message> {
+        let style = *self;
+        button(
+            container(text(label)
+                .style(move |_| text::Style { color: Some(style.text) }))
+                .center_y(Length::Fill)
+        )
+            .style(move |_theme, status| {
+                let mut button_style = button::Style::default();
+                button_style.background = Some(Background::Color(style.background));
+                button_style.text_color = style.text;
+                if status == button::Status::Hovered {
+                    button_style.background = Some(Background::Color(style.hover));
+                    button_style.border = Border {
+                        radius: style.hover_radius.into(),
+                        ..Border::default()
+                    };
+                }
+                button_style
+            })
+            .height(style.menu_button_height)
+            .padding([0, style.menu_button_horizontal_padding])
+            .on_press(msg)
+    }
 }
 
-fn menu_button(label: &str, msg: Message, color: Color) -> button::Button<'_, Message> {
-    button(
-        container(text(label)
-            .style(move |_| text::Style { color: Some(color), }))
-            .center_y(Length::Fill)
-    )
-        .style(|_theme, status| hover_style(status))
-        .height(HEIGHT)
-        .padding([0, 12])
-        .on_press(msg)
-}
-
-
-
-pub fn view(app: &App) ->Element<'_, Message> {
-    let background = app.palette().titlebar_background.into();
-    let letter_color = app.palette().letters.into();
+pub fn view(app: &App) -> Element<'_, Message> {
+    let style = TitlebarStyle::from_app(app);
 
     container(menu_bar!(
-        (menu_button("File", Message::None, letter_color)),
+        (style.menu_button("File", Message::None)),
 
         (
-            menu_button("View", Message::None, letter_color),
+            style.menu_button("View", Message::None),
             menu!(
-                (menu_button("Mode", Message::None, letter_color))
-            ).max_width(100.0).close_on_item_click(false).offset(MENU_HEIGHT)
+                (style.menu_button("Mode", Message::None))
+            ).max_width(style.submenu_max_width).close_on_item_click(false).offset(style.menu_button_height / 2.0)
         ),
 
-        (menu_button("Help", Message::None, letter_color))
-    ) // Menu_bar settings
+        (style.menu_button("Help", Message::None))
+    )
+        .style(move |_theme, _status| iced_aw::style::menu_bar::Style {
+            bar_background: style.background.into(),
+            menu_background: style.background.into(),
+            ..Default::default()
+        })
         .close_on_item_click_global(true)
         .close_on_background_click_global(true)
         .safe_bounds_margin(f32::MAX)
-    ) // Container settings
+    )
         .width(Length::Fill)
-        .height(HEIGHT)
+        .height(style.height)
         .style(move |_theme| container::Style {
-            background: Some(Background::Color(background)),
-            ..container::Style::default()
-        })
-        .into()
-}
-
-pub fn vview(app: &App) -> Element<'_, Message> {
-    let background: Color = app.palette().titlebar_background.into();
-    let button_color = app.palette().letters.into();
-
-    container(row![
-        menu_button("File", Message::None, button_color),
-        menu_button("View", Message::None, button_color),
-        menu_button("Help", Message::None, button_color),
-    ])
-        .width(Length::Fill)
-        .height(HEIGHT)
-        .style(move |_theme| container::Style {
-            background: Some(Background::Color(background)),
+            background: Some(Background::Color(style.background)),
             ..container::Style::default()
         })
         .into()

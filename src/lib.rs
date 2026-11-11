@@ -25,7 +25,14 @@ mod ui;
 mod app;
 
 pub fn run() -> iced::Result {
+    let default_text_size = app::App::default_text_size() as f32;
+
     iced::application(App::build, App::update, App::view)
+        .settings(iced::Settings {
+            default_font: iced::Font::DEFAULT,
+            default_text_size: iced::Pixels(default_text_size),
+            ..iced::Settings::default()
+        })
         .window(window::Settings {
             maximized: true,
             ..window::Settings::default()

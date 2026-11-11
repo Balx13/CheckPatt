@@ -27,6 +27,22 @@ pub struct Theme {
     pub name: String,
     pub colors: ThemeColors,
     pub typography: Typography,
+    pub ui: UiStyle,
+}
+
+#[derive(Debug, Clone, serde::Deserialize)]
+pub struct UiStyle {
+    pub titlebar_height: f32,
+    pub menu_button_height: f32,
+    pub menu_button_horizontal_padding: u16,
+    pub submenu_max_width: f32,
+    pub sidebar_indicator_width: f32,
+    pub sidebar_indicator_height: f32,
+    pub sidebar_icon_size: f32,
+    pub sidebar_button_size: f32,
+    pub sidebar_button_spacing: f32,
+    pub titlebar_hover_radius: f32,
+    pub sidebar_button_radius: f32,
 }
 
 impl Theme {
@@ -55,6 +71,11 @@ pub struct ColorPalette {
     pub titlebar_background: HexColor,
     pub sidebar_background: HexColor,
     pub hover: HexColor,
+    pub titlebar_hover: HexColor,
+    pub sidebar_selected: HexColor,
+    pub sidebar_button_hover: HexColor,
+    pub sidebar_selected_text: HexColor,
+    pub sidebar_text: HexColor,
 
     pub text_primary: HexColor,
     pub text_secondary: HexColor,

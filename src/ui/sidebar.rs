@@ -27,15 +27,48 @@ use iced::{
         column,
         space,
         svg,
-        Button,
         button
 }};
 
-use iced::widget::text;
 use crate::{
     app::App,
     ui::messages::{Message, TabId}
 };
+
+#[derive(Clone, Copy)]
+struct SidebarStyle {
+    background: Color,
+    indicator_width: f32,
+    indicator_height: f32,
+    icon_size: f32,
+    button_size: f32,
+    button_spacing: f32,
+    button_radius: f32,
+    selected: Color,
+    hover: Color,
+    selected_text: Color,
+    text: Color,
+}
+
+impl SidebarStyle {
+    fn from_app(app: &App) -> Self {
+        let palette = app.palette();
+        let ui = &app.theme().ui;
+        Self {
+            background: palette.sidebar_background.into(),
+            indicator_width: ui.sidebar_indicator_width,
+            indicator_height: ui.sidebar_indicator_height,
+            icon_size: ui.sidebar_icon_size,
+            button_size: ui.sidebar_button_size,
+            button_spacing: ui.sidebar_button_spacing,
+            button_radius: ui.sidebar_button_radius,
+            selected: palette.sidebar_selected.into(),
+            hover: palette.sidebar_button_hover.into(),
+            selected_text: palette.sidebar_selected_text.into(),
+            text: palette.sidebar_text.into(),
+        }
+    }
+}
 
 
 pub fn view(app: &App) -> Element<'_, Message> {
@@ -48,38 +81,24 @@ pub fn view(app: &App) -> Element<'_, Message> {
             TabId::Settings => settings::view(&app),
         }
     ]
+        .height(Length::Fill)
         .into()
 }
 
-/*
 fn sidebar(app: &App) -> Element<'_, Message> {
+    let style = SidebarStyle::from_app(app);
     container(
         column![
-                Sidebar::new(Message::TabSelected)
-                    .push(TabId::Home, TabLabel::Text("Home".into()))
-                    //.width(60)
-                    .height(Length::Shrink)
-                    .style(sidebar_style)
-                    .set_active_tab(&app.active_tab),
-
-                space().height(Length::Fill),
-
-                button("Settings").on_press(Message::TabSelected(TabId::Settings)),
-        ].height(Length::Fill)
-    ).into()
-}
-*/
-fn sidebar(app: &App) -> Element<'_, Message> {
-    container(
-        column![
-            sidebar_button(&app.assets.icons.home, TabId::Home, &app),
+            sidebar_button(&app.assets.icons.home, TabId::Home, &app, style),
             space().height(Length::Fill),
-            sidebar_button(&app.assets.icons.settings, TabId::Settings, &app)
+            sidebar_button(&app.assets.icons.settings, TabId::Settings, &app, style)
         ]
+            .height(Length::Fill)
     )
-        .style(|_theme| {
+        .height(Length::Fill)
+        .style(move |_theme| {
             container::Style {
-                background: Some(Color::from_rgb8(230, 229, 223).into()),
+                background: Some(Background::Color(style.background)),
                 ..Default::default()
             } })
         .into()
@@ -89,18 +108,18 @@ fn sidebar_button<'a>(
     icon: &'a svg::Handle,
     tab: TabId,
     app: &App,
-
+    style: SidebarStyle,
 ) -> Element<'a, Message> {
 
     let selected = app.active_tab == tab;
 
     row![
     container("")
-        .width(2)
-        .height(24)
+        .width(style.indicator_width)
+        .height(style.indicator_height)
         .style(move |_| container::Style {
             background: if selected {
-                Some(Color::from_rgb8(50, 100, 220).into())
+                Some(style.selected.into())
             } else {
                 None
             },
@@ -108,8 +127,12 @@ fn sidebar_button<'a>(
         }),
 
     button(
-        container(svg(icon.clone())).width(12).height(12)
-            .center(22)
+        container(svg(icon.clone()).style(move |_theme, _status| svg::Style {
+            color: Some(style.text),
+        }))
+            .width(style.icon_size)
+            .height(style.icon_size)
+            .center(style.button_size)
     )
     .on_press(Message::TabSelected(tab))
     .style(move |_theme, status|{
@@ -118,24 +141,24 @@ fn sidebar_button<'a>(
                 (true, button::Status::Active) |
                 (true, button::Status::Hovered)|
                 (false, button::Status::Hovered)=> {
-                    Some(Color::from_rgb8(210, 210, 210).into())
+                    Some(style.hover.into())
                 }
                 _ => None,
             };
 
-            let text_color = if selected {Color::WHITE} else {Color::BLACK};
+            let text_color = if selected { style.selected_text } else { style.text };
 
             button::Style {
                 background,
                 text_color,
                 border: iced::Border {
-                    radius: 16.0.into(),
+                    radius: style.button_radius.into(),
                     ..Default::default()
                 },
                 ..Default::default()
             }
         })
     ]
-        .spacing(4)
+        .spacing(style.button_spacing)
         .into()
 }

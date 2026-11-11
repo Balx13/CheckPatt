@@ -24,12 +24,25 @@ pub struct App {
 }
 
 impl App {
-    pub fn build() -> Self {
-        let paths = if read::installtoml().unwrap() {
+    fn paths() -> AppPaths {
+        if read::installtoml().unwrap() {
             AppPaths::portable()
         } else {
             AppPaths::installed()
-        };
+        }
+    }
+
+    pub fn default_text_size() -> u32 {
+        let paths = Self::paths();
+        paths.init().unwrap();
+
+        let themes = read::themes(&paths.datas).unwrap();
+        let settings = read::themes_settings(&paths.datas).unwrap();
+        themes[settings.selected].typography.text.size
+    }
+
+    pub fn build() -> Self {
+        let paths = Self::paths();
         paths.init().unwrap();
 
         let themes = read::themes(&paths.datas).unwrap();

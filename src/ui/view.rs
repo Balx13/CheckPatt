@@ -27,7 +27,7 @@ use iced::{
     Element,
     Length,
     Background,
-    widget::{container, column, text}}
+    widget::{container, column}}
 ;
 
 impl App {
@@ -36,7 +36,8 @@ impl App {
         column![
             titlebar::view(&self),
             sidebar::view(&self),
-        ])
+        ]
+            .height(Length::Fill))
             .width(Length::Fill)
             .height(Length::Fill)
             .style(|_| container::Style {
